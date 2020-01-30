@@ -1,0 +1,32 @@
+<h2>List of tasks</h2>
+
+<% if @tasks.empty? %>
+  <div>
+    <p>No tasks yet!</p>
+  </div>
+<% end %>
+
+<p>
+  <%# trash = "<i class=\"fas fa-plus\"></i>"%>
+  <%= link_to new_task_path do %>
+    <i class="fas fa-plus"></i>
+  <% end %>
+</p>
+
+<% @tasks.each do |task| %>
+  <h2>
+    <%= link_to task.title, task_path(task) %></h2>
+  <p><%= task.details %></p>
+
+  <% if task.completed %>
+    <i class="fa fa-check-square-o"></i>
+  <% else %>
+    <i class="fa fa-square-o"></i>
+  <% end %>
+  <%= link_to task_path(task), method: :delete do %>
+    <i class="fas fa-trash-alt"></i>
+  <% end %>
+  <%= link_to edit_task_path(task) do %>
+    <i class="fas fa-edit"></i>
+  <% end %>
+  <% end %>
